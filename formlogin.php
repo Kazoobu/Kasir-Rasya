@@ -16,15 +16,16 @@ require 'functions.php';
 
 // Proses login
 if (isset($_POST["login"])) {
-    $nama = $_POST["nama"];
-    $password = $_POST["password"];
+    $nama = $_POST["Nama"];
+    $password = $_POST["Password"];
 
     $result = mysqli_query($conn, "SELECT * FROM admin");
 
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
 
-        if (password_verify($password, $row["Password"])) {
+        // if (password_verify($password, $row["Password"])) {
+        if ($password === $row['Password']) {
             // Login berhasil
             $_SESSION["login"] = true;
             $_SESSION["AdminID"] = $row["AdminID"];
@@ -32,7 +33,7 @@ if (isset($_POST["login"])) {
 
 
             // Redirect ke halaman index
-            header("Location: index.php");
+            header("Location: index.html");
             exit;
         }
     }
@@ -62,12 +63,12 @@ if (isset($_POST["login"])) {
         <form action="" method="post">
             <ul>
                 <li>
-                    <label for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama" autocomplete="off" required>
+                    <label for="Nama">Nama</label>
+                    <input type="text" name="Nama" id="Nama" autocomplete="off" required>
                 </li>
                 <li>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
+                    <label for="Password">Password</label>
+                    <input type="password" name="Password" id="Password" required>
                 </li>
                 <li>
                     <button type="submit" name="login">Login</button>
