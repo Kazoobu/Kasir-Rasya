@@ -3,16 +3,11 @@ session_start();
 require 'functions.php';
 
 
-// // Cek session
-// if (isset($_SESSION["login"])) {
-//     if ($_SESSION['level'] === "admin" && basename($_SERVER['PHP_SELF']) !== "index.php") {
-//         header("Location: index.php");
-//         exit;
-//     } elseif ($_SESSION['level'] === "anggota" && basename($_SERVER['PHP_SELF']) !== "anggota.php") {
-//         header("Location: anggota.php");
-//         exit;
-//     }
-// }
+// Cek session
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
 
 // Proses login
 if (isset($_POST["login"])) {
@@ -33,7 +28,7 @@ if (isset($_POST["login"])) {
 
 
             // Redirect ke halaman index
-            header("Location: index.html");
+            header("Location: index.php");
             exit;
         }
     }
